@@ -11,7 +11,7 @@ all : bin/nativejson_release_x64_gmake
 	cd bin && ./nativejson_release_x64_gmake
 	cd result && make -f makefile
 
-bin/nativejson_%_gmake : build/gmake/nativejson.make bin/nativejson_%_gmake.a
+bin/nativejson_release_x64_gmake : build/gmake/nativejson.make bin/nativejson_release_x64_gmake.a build/gmake/nativejson.make
 	cd build/gmake && make -f nativejson.make config=$(CONFIG) verbose=$(VERBOSE)
 
 clean : 
@@ -25,19 +25,14 @@ clean :
 	rm -rf result/*.csv
 	rm -rf result/*.html
 
-setup :
+build/gmake/nativejson.make : 
 	cd build && ./premake.sh
 	
-	
-build/gmake/nativejson.make : setup
-build/gmake/benchmark.make : setup
-
-	
+build/gmake/benchmark.make : 
+	cd build && ./premake.sh
 	
 bin/nativejson_release_x64_gmake.a : build/gmake/benchmark.make
 	cd build/gmake && make -f benchmark.make config=$(CONFIG) verbose=$(VERBOSE)
-	
-	
 	
 clean_status :
 	@echo "Filesystem status according to GIT"
