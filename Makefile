@@ -42,7 +42,10 @@ ifeq ($(OS),Darwin)
 	sed -i -e 's/-L\/usr\/lib64/-L\/usr\/lib/g' build/gmake/nativejson.make
 	sed -i -e 's/-L\/usr\/lib64/-L\/usr\/lib/g' build/gmake/jsonclibs.make
 endif
-	
+ifeq ($(NOMACHINE),)
+	cd build && ./machine.sh
+endif
+
 bin/nativejson_release_x64_gmake.a : build/gmake/jsonclibs.make
 	cd build/gmake && make -f jsonclibs.make config=$(CONFIG) verbose=$(VERBOSE)
 	
