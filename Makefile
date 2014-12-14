@@ -15,7 +15,6 @@ all : bin/nativejson_release_x64_gmake
 	cd bin && ./nativejson_release_x64_gmake
 	cd result && make -f makefile
 
-bin/nativejson_%_gmake : build/gmake/nativejson.make bin/nativejson_%_gmake.a
 bin/nativejson_release_x64_gmake : build/gmake/nativejson.make bin/nativejson_release_x64_gmake.a build/gmake/nativejson.make
 	cd build/gmake && make -f nativejson.make config=$(CONFIG) verbose=$(VERBOSE)
 
@@ -30,12 +29,8 @@ clean :
 	rm -rf result/*.csv
 	rm -rf result/*.html
 
-<<<<<<< HEAD
-setup :
-	@echo "Setting up environment for OS $(OS)"
-=======
 build/gmake/nativejson.make : 
->>>>>>> d853cadc4ed672400fc34dab97603d176add1a73
+	@echo "Setting up environment for OS $(OS)"
 	cd build && ./premake.sh
 ifeq ($(OS),Darwin)
 	# Patch generated makefiles to remove -Wl,-x. Bug in premake
@@ -47,18 +42,6 @@ ifeq ($(OS),Darwin)
 	sed -i -e 's/-L\/usr\/lib64/-L\/usr\/lib/g' build/gmake/nativejson.make
 	sed -i -e 's/-L\/usr\/lib64/-L\/usr\/lib/g' build/gmake/jsonclibs.make
 endif
-	
-	
-<<<<<<< HEAD
-	
-build/gmake/nativejson.make : setup
-build/gmake/jsonclibs.make : setup
-
-	
-=======
-build/gmake/benchmark.make : 
-	cd build && ./premake.sh
->>>>>>> d853cadc4ed672400fc34dab97603d176add1a73
 	
 bin/nativejson_release_x64_gmake.a : build/gmake/jsonclibs.make
 	cd build/gmake && make -f jsonclibs.make config=$(CONFIG) verbose=$(VERBOSE)
