@@ -1,9 +1,13 @@
 ifeq ($(CONFIG),)
-	CONFIG = release64
+	CONFIG := release64
 endif
 
 ifeq ($(VERBOSE),)
-	VERBOSE=1
+	VERBOSE := 1
+endif
+
+ifeq ($(OS),)
+	OS := $(shell uname -s)
 endif
 
 
@@ -26,16 +30,28 @@ clean :
 	rm -rf result/*.html
 
 setup :
+	@echo "Setting up environment for OS $(OS)"
 	cd build && ./premake.sh
+ifeq ($(OS),Darwin)
+	# Patch generated makefiles to remove -Wl,-x. Bug in premake
+	# tracked here: http://industriousone.com/topic/how-remove-flags-ldflags
+	sed -i -e 's/-Wl,-x//g' build/gmake/nativejson.make
+	sed -i -e 's/-Wl,-x//g' build/gmake/jsonclibs.make
+	# Patch generated makefile to replace -L/usr/lib64 with -L/usr/lib to
+	# avoid linker warning
+	sed -i -e 's/-L\/usr\/lib64/-L\/usr\/lib/g' build/gmake/nativejson.make
+	sed -i -e 's/-L\/usr\/lib64/-L\/usr\/lib/g' build/gmake/jsonclibs.make
+endif
+	
 	
 	
 build/gmake/nativejson.make : setup
-build/gmake/benchmark.make : setup
+build/gmake/jsonclibs.make : setup
 
 	
 	
-bin/nativejson_release_x64_gmake.a : build/gmake/benchmark.make
-	cd build/gmake && make -f benchmark.make config=$(CONFIG) verbose=$(VERBOSE)
+bin/nativejson_release_x64_gmake.a : build/gmake/jsonclibs.make
+	cd build/gmake && make -f jsonclibs.make config=$(CONFIG) verbose=$(VERBOSE)
 	
 	
 	
