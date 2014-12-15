@@ -6,3 +6,8 @@
 /result/*.csv
 /result/*.html
 src/machine.h
+data/100mb.json
+data/citylots.json
+data/large-dict.json
+data/medium-dict.json
+
