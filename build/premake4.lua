@@ -156,7 +156,9 @@ solution "jsonstat"
         "../thirdparty/jsoncpp/include/",
         "../thirdparty/rapidjson/include/",
         "../thirdparty/udp-json-parser/",
-        "../thirdparty/include/"
+        "../thirdparty/include/",
+		os.getenv("BOOST_HOME")
+		
     }
 
     configuration "release"
