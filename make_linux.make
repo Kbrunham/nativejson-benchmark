@@ -11,7 +11,7 @@ ifeq ($(OS),)
 endif
 
 
-all : bin/nativejson_release_x64_gmake
+all : bin/nativejson_release_x64_gmake bin/jsonstat/jsonstat_rapidjson_release_x64_gmake
 	cd bin && ./nativejson_release_x64_gmake
 	cd result && make -f makefile
 
@@ -49,6 +49,9 @@ endif
 bin/nativejson_release_x64_gmake.a : build/gmake/jsonclibs.make
 	cd build/gmake && make -f jsonclibs.make config=$(CONFIG) verbose=$(VERBOSE)
 	
+bin/jsonstat/jsonstat_rapidjson_release_x64_gmake : build/gmake/jsonstat.make
+	cd build/gmake && make -f jsonstat.make config=$(CONFIG) verbose=$(VERBOSE)
+
 clean_status :
 	@echo "Filesystem status according to GIT"
 	@git clean -dfxn
