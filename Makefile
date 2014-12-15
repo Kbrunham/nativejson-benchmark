@@ -12,7 +12,6 @@ endif
 
 
 EXTRA_JSON_TEST_DATA = \
-	data/citm_catalog.json \
 	data/large-dict.json \
 	data/medium-dict.json \
 	data/citylots.json \
@@ -24,9 +23,6 @@ ifeq ($(OS),Windows_NT)
 else
 	$(MAKE) -f make_linux.make
 endif
-
-data/citm_catalog.json : thirdparty/json-parsers-benchmark/data/citm_catalog.json
-	cp -f $< $@	
 
 data/large-dict.json : thirdparty/json-benchmarks/data/large-dict.json
 	cp -f $< $@	
