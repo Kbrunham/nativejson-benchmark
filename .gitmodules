@@ -58,3 +58,6 @@
 [submodule "thirdparty/json-parsers-benchmark"]
 	path = thirdparty/json-parsers-benchmark
 	url = https://github.com/RichardHightower/json-parsers-benchmark.git
+[submodule "thirdparty/json-benchmarks"]
+	path = thirdparty/json-benchmarks
+	url = https://github.com/sanSS/json-bechmarks.git

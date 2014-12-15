@@ -21,6 +21,9 @@ endif
 data/citm_catalog.json : thirdparty/json-parsers-benchmark/data/citm_catalog.json
 	cp -f $< $@	
 
+data/large-dict.json : thirdparty/json-benchmarks/data/large-dict.json
+data/medium-dict.json : thirdparty/json-benchmarks/data/medium-dict.json
+
 clean : 
 	rm -rf build/gmake
 	rm -rf build/vs2005
