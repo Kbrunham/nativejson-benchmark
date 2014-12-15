@@ -84,7 +84,8 @@ solution "benchmark"
             "../thirdparty/",
             "../thirdparty/include/",
             "../thirdparty/ujson4c/3rdparty/",
-			"../thirdparty/udp-json-parser/"
+			"../thirdparty/udp-json-parser/",
+			os.getenv("BOOST_HOME")
         }
 
 		files { 
@@ -108,6 +109,7 @@ solution "benchmark"
             "../thirdparty/rapidjson/include/",
             "../thirdparty/udp-json-parser/",
             "../thirdparty/include/",
+			os.getenv("BOOST_HOME")
         }
 
 		files { 
@@ -154,7 +156,7 @@ solution "jsonstat"
         "../thirdparty/jsoncpp/include/",
         "../thirdparty/rapidjson/include/",
         "../thirdparty/udp-json-parser/",
-        "../thirdparty/include/",
+        "../thirdparty/include/"
     }
 
     configuration "release"
