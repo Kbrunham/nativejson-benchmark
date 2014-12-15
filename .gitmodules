@@ -61,3 +61,6 @@
 [submodule "thirdparty/json-benchmarks"]
 	path = thirdparty/json-benchmarks
 	url = https://github.com/sanSS/json-bechmarks.git
+[submodule "thirdparty/sf-city-lots-json"]
+	path = thirdparty/sf-city-lots-json
+	url = https://github.com/zemirco/sf-city-lots-json.git
