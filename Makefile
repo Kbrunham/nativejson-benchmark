@@ -11,7 +11,14 @@ ifeq ($(OS),)
 endif
 
 
-all : data/citm_catalog.json
+EXTRA_JSON_TEST_DATA = \
+	data/citm_catalog.json \
+	data/large-dict.json \
+	data/medium-dict.json \
+	data/citylots.json \
+	data/100mb.json
+
+all : $(EXTRA_JSON_TEST_DATA)
 ifeq ($(OS),Windows_NT)
 	$(MAKE) -f make_windows.make
 else
@@ -28,6 +35,9 @@ data/medium-dict.json : thirdparty/json-benchmarks/data/medium-dict.json
 	cp -f $< $@	
 
 data/citylots.json : thirdparty/sf-city-lots-json/citylots.json
+	cp -f $< $@	
+
+data/100mb.json : thirdparty/largeJSON/100mb.json
 	cp -f $< $@	
 
 clean : 

@@ -64,3 +64,6 @@
 [submodule "thirdparty/sf-city-lots-json"]
 	path = thirdparty/sf-city-lots-json
 	url = https://github.com/zemirco/sf-city-lots-json.git
+[submodule "thirdparty/largeJSON"]
+	path = thirdparty/largeJSON
+	url = https://github.com/seductiveapps/largeJSON.git
