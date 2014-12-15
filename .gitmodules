@@ -55,3 +55,6 @@
 [submodule "thirdparty/simplejson"]
 	path = thirdparty/simplejson
 	url = https://github.com/MJPA/SimpleJSON.git
+[submodule "thirdparty/json-parsers-benchmark"]
+	path = thirdparty/json-parsers-benchmark
+	url = https://github.com/RichardHightower/json-parsers-benchmark.git

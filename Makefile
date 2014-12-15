@@ -11,12 +11,15 @@ ifeq ($(OS),)
 endif
 
 
-all :
+all : data/citm_catalog.json
 ifeq ($(OS),Windows_NT)
 	$(MAKE) -f make_windows.make
 else
 	$(MAKE) -f make_linux.make
 endif
+
+data/citm_catalog.json : thirdparty/json-parsers-benchmark/data/citm_catalog.json
+	cp -f $< $@	
 
 clean : 
 	rm -rf build/gmake
