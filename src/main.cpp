@@ -16,19 +16,6 @@
 static const unsigned cTrialCount = 1;
 static const char* gProgramName;
 
-struct TestJson {
-    TestJson() : fullpath(), filename(), json(), length(), stat(), statUTF16() {}
-
-    char* fullpath;
-    char* filename;
-    char* json;
-    size_t length;
-    Stat stat;           // Reference statistics
-    Stat statUTF16;      // Reference statistics
-};
-
-typedef std::vector<TestJson> TestJsonList;
-
 static void PrintStat(const Stat& stat) {
     printf("objectCount:  %10u\n", (unsigned)stat.objectCount);
     printf("arrayCount:   %10u\n", (unsigned)stat.arrayCount);
@@ -171,13 +158,14 @@ static void Verify(const TestBase& test, const TestJsonList& testJsons) {
         {
         	// This test cannot be performed with the given json
         	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
+        	test.ignoreJson(*itr);
         	continue;
         }
 
         ParseResultBase* dom1 = test.Parse(itr->json, itr->length);
         if (!dom1) {
             printf("\nFailed to parse '%s'\n", itr->filename);
-            failed = true;
+            test.ignoreJson(*itr);
             continue;
         }
 
@@ -213,12 +201,15 @@ static void Verify(const TestBase& test, const TestJsonList& testJsons) {
             failed = true;
 
             // Write out json1 for diagnosis
+#ifdef WRITE_JSON_ON_FAILURE
             char filename[FILENAME_MAX];
             sprintf(filename, "%s_%s", test.GetName(), itr->filename);
             FILE* fp = fopen(filename, "wb");
             fwrite(json1->c_str(), strlen(json1->c_str()), 1, fp);
             fclose(fp);
+#endif
 
+            test.ignoreJson(*itr);
             delete json1;
             continue;
         }
@@ -253,13 +244,15 @@ static void Verify(const TestBase& test, const TestJsonList& testJsons) {
             printf("\n");
 
             // Write out json1 for diagnosis
+#ifdef WRITE_JSON_ON_FAILURE
             char filename[FILENAME_MAX];
             sprintf(filename, "%s_%s", test.GetName(), itr->filename);
             FILE* fp = fopen(filename, "wb");
             fwrite(json1->c_str(), strlen(json1->c_str()), 1, fp);
             fclose(fp);
-
+#endif
             failed = true;
+            test.ignoreJson(*itr);
         }
 
         delete json1;
@@ -328,6 +321,12 @@ static void BenchParse(const TestBase& test, const TestJsonList& testJsons, FILE
         	continue;
         }
 
+        if (test.should_ignore(*itr))
+        {
+        	printf("\nSkipping json file as failed validation\n");
+        	continue;
+        }
+
         double minDuration = DBL_MAX;
 
         BENCH_MEMORYSTAT_INIT();
@@ -389,8 +388,19 @@ static void BenchStringify(const TestBase& test, const TestJsonList& testJsons, 
         	continue;
         }
 
+        if (test.should_ignore(*itr))
+        {
+        	printf("\nSkipping json file as failed validation\n");
+        	continue;
+        }
+
         double minDuration = DBL_MAX;
         ParseResultBase* dom = test.Parse(itr->json, itr->length);
+        if (dom == nullptr)
+        {
+        	printf("Failed parse\n");
+        	continue;
+        }
 
         BENCH_MEMORYSTAT_INIT();
         bool supported = true;
@@ -452,6 +462,13 @@ static void BenchPrettify(const TestBase& test, const TestJsonList& testJsons, F
         	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
         	continue;
         }
+
+        if (test.should_ignore(*itr))
+        {
+        	printf("\nSkipping json file as failed validation\n");
+        	continue;
+        }
+
 
         double minDuration = DBL_MAX;
         ParseResultBase* dom = test.Parse(itr->json, itr->length);
@@ -517,6 +534,12 @@ static void BenchStatistics(const TestBase& test, const TestJsonList& testJsons,
         	continue;
         }
 
+        if (test.should_ignore(*itr))
+        {
+        	printf("\nSkipping json file as failed validation\n");
+        	continue;
+        }
+
         double minDuration = DBL_MAX;
         ParseResultBase* dom = test.Parse(itr->json, itr->length);
 
@@ -574,6 +597,12 @@ static void BenchSaxRoundtrip(const TestBase& test, const TestJsonList& testJson
         {
         	// This test cannot be performed with the given json
         	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
+        	continue;
+        }
+
+        if (test.should_ignore(*itr))
+        {
+        	printf("\nSkipping json file as failed validation\n");
         	continue;
         }
 
@@ -637,6 +666,13 @@ static void BenchSaxStatistics(const TestBase& test, const TestJsonList& testJso
         	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
         	continue;
         }
+
+        if (test.should_ignore(*itr))
+        {
+        	printf("\nSkipping json file as failed validation\n");
+        	continue;
+        }
+
 
         double minDuration = DBL_MAX;
 

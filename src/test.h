@@ -5,6 +5,48 @@
 #include <vector>
 #include <cstring>
 #include <cstdlib>
+#include <algorithm>
+#include <math.h>
+
+using std::isfinite;
+
+struct Stat {
+    size_t objectCount;
+    size_t arrayCount;
+    size_t numberCount;
+    size_t stringCount;
+    size_t trueCount;
+    size_t falseCount;
+    size_t nullCount;
+
+    size_t memberCount;   // Number of members in all objects
+    size_t elementCount;  // Number of elements in all arrays
+    size_t stringLength;  // Number of code units in all strings
+};
+
+
+struct TestJson {
+    TestJson() : fullpath(), filename(), json(), length(), stat(), statUTF16() {}
+
+    char* fullpath;
+    char* filename;
+    char* json;
+    size_t length;
+    Stat stat;           // Reference statistics
+    Stat statUTF16;      // Reference statistics
+
+    bool operator<(const TestJson& rhs) const {
+        return strcmp(filename, rhs.filename) < 0;
+    }
+
+    bool operator==(const TestJson& rhs) const {
+        return strcmp(filename, rhs.filename) == 0;
+    }
+
+};
+
+typedef std::vector<TestJson> TestJsonList;
+
 
 class TestBase;
 typedef std::vector<const TestBase *> TestList;
@@ -34,20 +76,6 @@ public:
 
 private:
     TestList mTests;
-};
-
-struct Stat {
-    size_t objectCount;
-    size_t arrayCount;
-    size_t numberCount;
-    size_t stringCount;
-    size_t trueCount;
-    size_t falseCount;
-    size_t nullCount;
-
-    size_t memberCount;   // Number of members in all objects
-    size_t elementCount;  // Number of elements in all arrays
-    size_t stringLength;  // Number of code units in all strings
 };
 
 // Each test can customize what to be stored in parse result, 
@@ -80,8 +108,15 @@ public:
         return strcmp(name_, rhs.name_) < 0;
     }
 
+    bool operator==(const TestBase& rhs) const {
+        return strcmp(name_, rhs.name_) == 0;
+    }
+
     // What is the max JSON file size supported by this test
     virtual unsigned long GetMaxSize() const {return 0;}
+
+    virtual void ignoreJson(const TestJson& json) const final {ignore_list.push_back(json);}
+    virtual bool should_ignore(const TestJson& json) const final {return std::find(ignore_list.begin(), ignore_list.end(), json) != ignore_list.end();}
 
 #if TEST_INFO
     virtual const char* GetName() const = 0;
@@ -146,6 +181,7 @@ public:
 
 protected:
     const char* name_;
+    mutable std::vector<TestJson> ignore_list;
 };
 
 #define REGISTER_TEST(cls) static cls gRegister##cls
