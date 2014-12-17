@@ -12,3 +12,4 @@ data/large-dict.json
 data/medium-dict.json
 
 .settings
+build/xcode3
