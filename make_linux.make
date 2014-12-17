@@ -51,7 +51,7 @@ all : code
 
 code : bin/nativejson_release_x64_gmake bin/jsonstat/jsonstat_rapidjson_release_x64_gmake
 
-build/gmake/%.make : $(MACHINE_H_FILE)
+build/gmake/%.make : $(MACHINE_H_FILE) build/premake4.lua
 	@echo "Setting up environment for OS $(OS)"
 	cd build && ./premake.sh
 
