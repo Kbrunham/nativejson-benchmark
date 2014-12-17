@@ -67,3 +67,6 @@
 [submodule "thirdparty/largeJSON"]
 	path = thirdparty/largeJSON
 	url = https://github.com/seductiveapps/largeJSON.git
+[submodule "thirdparty/folly"]
+	path = thirdparty/folly
+	url = http://github.com/facebook/folly
