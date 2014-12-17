@@ -85,8 +85,16 @@ public:
     virtual bool Statistics(const ParseResultBase* parseResult, Stat* stat) const {
         const Ujson4cParseResult* pr = static_cast<const Ujson4cParseResult*>(parseResult);
         memset(stat, 0, sizeof(Stat));
-        GenStat(stat, pr->root);
-        return true;
+        if (pr->root != nullptr)
+        {
+            GenStat(stat, pr->root);
+            return true;
+        }
+        else
+        {
+            return false;
+
+        }
     }
 #endif
 };

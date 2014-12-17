@@ -84,9 +84,16 @@ public:
 #if TEST_STATISTICS
     virtual bool Statistics(const ParseResultBase* parseResult, Stat* stat) const {
         const ParsonParseResult* pr = static_cast<const ParsonParseResult*>(parseResult);
-        memset(stat, 0, sizeof(Stat));
-        GenStat(stat, (JSON_Value*)pr->root);
-        return true;
+        if (pr != nullptr)
+        {
+            memset(stat, 0, sizeof(Stat));
+            GenStat(stat, (JSON_Value*)pr->root);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 #endif
 };
