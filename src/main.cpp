@@ -167,6 +167,13 @@ static void Verify(const TestBase& test, const TestJsonList& testJsons) {
     for (TestJsonList::const_iterator itr = testJsons.begin(); itr != testJsons.end(); ++itr) {
         MEMORYSTAT_SCOPE();
 
+        if ((test.GetMaxSize() > 0) && (test.GetMaxSize() < itr->length))
+        {
+        	// This test cannot be performed with the given json
+        	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
+        	continue;
+        }
+
         ParseResultBase* dom1 = test.Parse(itr->json, itr->length);
         if (!dom1) {
             printf("\nFailed to parse '%s'\n", itr->filename);
@@ -314,6 +321,13 @@ static void BenchParse(const TestBase& test, const TestJsonList& testJsons, FILE
         printf("%15s %-20s ... ", "Parse", itr->filename);
         fflush(stdout);
 
+        if ((test.GetMaxSize() > 0) && (test.GetMaxSize() < itr->length))
+        {
+        	// This test cannot be performed with the given json
+        	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
+        	continue;
+        }
+
         double minDuration = DBL_MAX;
 
         BENCH_MEMORYSTAT_INIT();
@@ -367,6 +381,13 @@ static void BenchStringify(const TestBase& test, const TestJsonList& testJsons, 
     for (TestJsonList::const_iterator itr = testJsons.begin(); itr != testJsons.end(); ++itr) {
         printf("%15s %-20s ... ", "Stringify", itr->filename);
         fflush(stdout);
+
+        if ((test.GetMaxSize() > 0) && (test.GetMaxSize() < itr->length))
+        {
+        	// This test cannot be performed with the given json
+        	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
+        	continue;
+        }
 
         double minDuration = DBL_MAX;
         ParseResultBase* dom = test.Parse(itr->json, itr->length);
@@ -425,6 +446,13 @@ static void BenchPrettify(const TestBase& test, const TestJsonList& testJsons, F
         printf("%15s %-20s ... ", "Prettify", itr->filename);
         fflush(stdout);
 
+        if ((test.GetMaxSize() > 0) && (test.GetMaxSize() < itr->length))
+        {
+        	// This test cannot be performed with the given json
+        	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
+        	continue;
+        }
+
         double minDuration = DBL_MAX;
         ParseResultBase* dom = test.Parse(itr->json, itr->length);
 
@@ -482,6 +510,13 @@ static void BenchStatistics(const TestBase& test, const TestJsonList& testJsons,
         printf("%15s %-20s ... ", "Statistics", itr->filename);
         fflush(stdout);
 
+        if ((test.GetMaxSize() > 0) && (test.GetMaxSize() < itr->length))
+        {
+        	// This test cannot be performed with the given json
+        	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
+        	continue;
+        }
+
         double minDuration = DBL_MAX;
         ParseResultBase* dom = test.Parse(itr->json, itr->length);
 
@@ -534,6 +569,13 @@ static void BenchSaxRoundtrip(const TestBase& test, const TestJsonList& testJson
     for (TestJsonList::const_iterator itr = testJsons.begin(); itr != testJsons.end(); ++itr) {
         printf("%15s %-20s ... ", "SaxRoundtrip", itr->filename);
         fflush(stdout);
+
+        if ((test.GetMaxSize() > 0) && (test.GetMaxSize() < itr->length))
+        {
+        	// This test cannot be performed with the given json
+        	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
+        	continue;
+        }
 
         double minDuration = DBL_MAX;
 
@@ -588,6 +630,13 @@ static void BenchSaxStatistics(const TestBase& test, const TestJsonList& testJso
     for (TestJsonList::const_iterator itr = testJsons.begin(); itr != testJsons.end(); ++itr) {
         printf("%15s %-20s ... ", "Sax Statistics", itr->filename);
         fflush(stdout);
+
+        if ((test.GetMaxSize() > 0) && (test.GetMaxSize() < itr->length))
+        {
+        	// This test cannot be performed with the given json
+        	printf("\nSkipping as %s size exceeds max size (%zu > %lu)\n", itr->filename, itr->length, test.GetMaxSize());
+        	continue;
+        }
 
         double minDuration = DBL_MAX;
 

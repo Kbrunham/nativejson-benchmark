@@ -69,13 +69,19 @@ public:
 
 class TestBase {
 public:
-    TestBase() {
+    TestBase() : name_()
+	{
         TestManager::Instance().AddTest(this);
     }
+
+    virtual ~TestBase() {}
 
     bool operator<(const TestBase& rhs) const {
         return strcmp(name_, rhs.name_) < 0;
     }
+
+    // What is the max JSON file size supported by this test
+    virtual unsigned long GetMaxSize() const {return 0;}
 
 #if TEST_INFO
     virtual const char* GetName() const = 0;

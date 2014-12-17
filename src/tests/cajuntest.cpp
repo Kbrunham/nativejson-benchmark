@@ -68,12 +68,13 @@ public:
 class CajunTest : public TestBase {
 public:
 #if TEST_INFO
-    virtual const char* GetName() const { return "CAJUN (C++)"; }
-    virtual const char* GetFilename() const { return __FILE__; }
+    virtual const char* GetName() const override { return "CAJUN (C++)"; }
+    virtual const char* GetFilename() const override { return __FILE__; }
+    virtual unsigned long GetMaxSize() const override {return 2500000;}
 #endif
 
 #if TEST_PARSE
-    virtual ParseResultBase* Parse(const char* json, size_t length) const {
+    virtual ParseResultBase* Parse(const char* json, size_t length) const override {
         CajunParseResult* pr = new CajunParseResult;
         std::istringstream is(std::string(json, length));
         try
@@ -89,7 +90,7 @@ public:
 #endif
 
 #if TEST_STRINGIFY
-    virtual StringResultBase* Stringify(const ParseResultBase* parseResult) const {
+    virtual StringResultBase* Stringify(const ParseResultBase* parseResult) const override {
         const CajunParseResult* pr = static_cast<const CajunParseResult*>(parseResult);
         CajunStringResult* sr = new CajunStringResult;
         std::stringstream os;
@@ -100,7 +101,7 @@ public:
 #endif
 
 #if TEST_STATISTICS
-    virtual bool Statistics(const ParseResultBase* parseResult, Stat* stat) const {
+    virtual bool Statistics(const ParseResultBase* parseResult, Stat* stat) const override {
         const CajunParseResult* pr = static_cast<const CajunParseResult*>(parseResult);
         memset(stat, 0, sizeof(Stat));
         StatVisitor visitor(*stat);
