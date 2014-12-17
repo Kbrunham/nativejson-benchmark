@@ -45,9 +45,11 @@ PATCHED_MAKE_FILE_TARGETS = \
 
 .PRECIOUS: build/gmake/%.make
 
-all : bin/nativejson_release_x64_gmake bin/jsonstat/jsonstat_rapidjson_release_x64_gmake
+all : code
 	cd bin && ./nativejson_release_x64_gmake
 	cd result && make -f makefile
+
+code : bin/nativejson_release_x64_gmake bin/jsonstat/jsonstat_rapidjson_release_x64_gmake
 
 build/gmake/%.make : $(MACHINE_H_FILE)
 	@echo "Setting up environment for OS $(OS)"
