@@ -97,35 +97,56 @@ public:
 #if TEST_STRINGIFY
     virtual StringResultBase* Stringify(const ParseResultBase* parseResult) const {
         const JanssonParseResult* pr = static_cast<const JanssonParseResult*>(parseResult);
-        JanssonStringResult* sr = new JanssonStringResult;
-        sr->s = json_dumps(pr->root, 0);
-        if (!sr->s) {
-            delete sr;
+        if (pr != nullptr)
+        {
+            JanssonStringResult* sr = new JanssonStringResult;
+            sr->s = json_dumps(pr->root, 0);
+            if (!sr->s) {
+                delete sr;
+                return 0;
+            }
+            return sr;
+        }
+        else
+        {
             return 0;
         }
-        return sr;
     }
 #endif
 
 #if TEST_PRETTIFY
     virtual StringResultBase* Prettify(const ParseResultBase* parseResult) const {
         const JanssonParseResult* pr = static_cast<const JanssonParseResult*>(parseResult);
-        JanssonStringResult* sr = new JanssonStringResult;
-        sr->s = json_dumps(pr->root, JSON_INDENT(4));
-        if (!sr->s) {
-            delete sr;
+        if (pr != nullptr)
+        {
+            JanssonStringResult* sr = new JanssonStringResult;
+            sr->s = json_dumps(pr->root, JSON_INDENT(4));
+            if (!sr->s) {
+                delete sr;
+                return 0;
+            }
+            return sr;
+        }
+        else
+        {
             return 0;
         }
-        return sr;
     }
 #endif
 
 #if TEST_STATISTICS
     virtual bool Statistics(const ParseResultBase* parseResult, Stat* stat) const {
         const JanssonParseResult* pr = static_cast<const JanssonParseResult*>(parseResult);
-        memset(stat, 0, sizeof(Stat));
-        GenStat(stat, pr->root);
-        return true;
+        if (pr != nullptr)
+        {
+            memset(stat, 0, sizeof(Stat));
+            GenStat(stat, pr->root);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 #endif
 };
