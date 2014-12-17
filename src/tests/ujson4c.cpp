@@ -77,6 +77,11 @@ public:
         (void)length;
         Ujson4cParseResult* pr = new Ujson4cParseResult;
 		pr->root = UJDecode(json, length, NULL, &pr->state);
+		if (pr->root == nullptr)
+		{
+			delete pr;
+			return 0;
+		}
     	return pr;
     }
 #endif
