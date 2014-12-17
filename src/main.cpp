@@ -17,7 +17,7 @@ static const unsigned cTrialCount = 1;
 static const char* gProgramName;
 
 struct TestJson {
-    TestJson() : filename(), json(), length(), stat(), statUTF16() {}
+    TestJson() : fullpath(), filename(), json(), length(), stat(), statUTF16() {}
 
     char* fullpath;
     char* filename;
