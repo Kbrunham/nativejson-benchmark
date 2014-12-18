@@ -323,7 +323,7 @@ static void BenchParse(const TestBase& test, const TestJsonList& testJsons, FILE
 
         if (test.should_ignore(*itr))
         {
-        	printf("\nSkipping json file as failed validation\n");
+        	printf("\nSkipping json file %s as it failed validation\n", itr->filename);
         	continue;
         }
 
@@ -390,7 +390,7 @@ static void BenchStringify(const TestBase& test, const TestJsonList& testJsons, 
 
         if (test.should_ignore(*itr))
         {
-        	printf("\nSkipping json file as failed validation\n");
+        	printf("\nSkipping json file %s as it failed validation\n", itr->filename);
         	continue;
         }
 
@@ -465,7 +465,7 @@ static void BenchPrettify(const TestBase& test, const TestJsonList& testJsons, F
 
         if (test.should_ignore(*itr))
         {
-        	printf("\nSkipping json file as failed validation\n");
+        	printf("\nSkipping json file %s as it failed validation\n", itr->filename);
         	continue;
         }
 
@@ -536,7 +536,7 @@ static void BenchStatistics(const TestBase& test, const TestJsonList& testJsons,
 
         if (test.should_ignore(*itr))
         {
-        	printf("\nSkipping json file as failed validation\n");
+        	printf("\nSkipping json file %s as it failed validation\n", itr->filename);
         	continue;
         }
 
@@ -602,7 +602,7 @@ static void BenchSaxRoundtrip(const TestBase& test, const TestJsonList& testJson
 
         if (test.should_ignore(*itr))
         {
-        	printf("\nSkipping json file as failed validation\n");
+        	printf("\nSkipping json file %s as it failed validation\n", itr->filename);
         	continue;
         }
 
@@ -669,7 +669,7 @@ static void BenchSaxStatistics(const TestBase& test, const TestJsonList& testJso
 
         if (test.should_ignore(*itr))
         {
-        	printf("\nSkipping json file as failed validation\n");
+        	printf("\nSkipping json file %s as it failed validation\n", itr->filename);
         	continue;
         }
 
@@ -751,8 +751,11 @@ static void BenchCodeSize(const TestBase& test, const TestJsonList& testJsons, F
 #elif defined(__CYGWIN__)
     int ret = spawnv(_P_WAIT, fullpath, argv);
 #else
+    char* const eviron[] = {"LD_LIBRARY_PATH"};
+
+
     pid_t pid;
-    int ret = posix_spawn(&pid, fullpath, NULL, NULL, argv, NULL);
+    int ret = posix_spawn(&pid, fullpath, NULL, NULL, argv, eviron);
     if (ret == 0) {
         int status;
         waitpid(pid, &status, 0);
