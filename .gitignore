@@ -4,6 +4,7 @@
 /intermediate
 /thirdparty/include/yajl
 /thirdparty/include/double-conversion
+/thirdparty/include/folly
 /result/*.csv
 /result/*.html
 src/machine.h
