@@ -3,6 +3,7 @@
 /build/vs*/
 /intermediate
 /thirdparty/include/yajl
+/thirdparty/include/double-conversion
 /result/*.csv
 /result/*.html
 src/machine.h
