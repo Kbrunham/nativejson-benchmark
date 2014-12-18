@@ -95,6 +95,8 @@ solution "benchmark"
 		setTargetObjDir("../bin")
 
 		copyfiles("../thirdparty/include/yajl", "../thirdparty/yajl/src/api/*.h")
+		copyfiles("../thirdparty/include/double-conversion/", "../thirdparty/double-conversion/src/*.h")
+		copyfiles("../thirdparty/include/double-conversion/", "../thirdparty/double-conversion/src/*.cc")
 
 	project "nativejson"
 		kind "ConsoleApp"
@@ -109,6 +111,7 @@ solution "benchmark"
             "../thirdparty/rapidjson/include/",
             "../thirdparty/udp-json-parser/",
             "../thirdparty/include/",
+	        "../thirdparty/folly/",
 			os.getenv("BOOST_HOME")
         }
 
@@ -157,6 +160,7 @@ solution "jsonstat"
         "../thirdparty/rapidjson/include/",
         "../thirdparty/udp-json-parser/",
         "../thirdparty/include/",
+        "../thirdparty/folly/",
 		os.getenv("BOOST_HOME")
 		
     }
