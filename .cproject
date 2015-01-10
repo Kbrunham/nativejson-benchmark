@@ -21,15 +21,24 @@
 							<builder autoBuildTarget="-f make_linux.make code" enableAutoBuild="true" id="org.eclipse.cdt.build.core.settings.default.builder.1972613683" incrementalBuildTarget="-f make_linux.make code" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.1462798811" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.445282870" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.331077780" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath"/>
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.331077780" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${QT_ROOT}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${BOOST_ROOT}/include&quot;"/>
+								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.934267191" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.262983622" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.561686416" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath"/>
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.561686416" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${QT_ROOT}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${BOOST_ROOT}/include&quot;"/>
+								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1480752027" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.834139333" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.983492822" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath"/>
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.983492822" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${QT_ROOT}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${BOOST_ROOT}/include&quot;"/>
+								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1576930349" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 						</toolChain>
@@ -85,15 +94,24 @@
 							<builder autoBuildTarget="-f make_linux.make code CONFIG=debug64" enableAutoBuild="true" id="org.eclipse.cdt.build.core.settings.default.builder.1602603382" incrementalBuildTarget="-f make_linux.make code CONFIG=debug64" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.126484662" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.1919072400" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1103606337" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath"/>
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1103606337" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${QT_ROOT}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${BOOST_ROOT}/include&quot;"/>
+								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.408480933" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.798746574" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1700864165" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath"/>
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1700864165" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${QT_ROOT}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${BOOST_ROOT}/include&quot;"/>
+								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.745491727" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.604525091" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
-								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.939780051" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath"/>
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.939780051" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${QT_ROOT}/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${BOOST_ROOT}/include&quot;"/>
+								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1638308630" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
 						</toolChain>
@@ -137,6 +155,8 @@
 		<configuration configurationName="Default">
 			<resource resourceType="PROJECT" workspacePath="/nativejson-benchmark"/>
 		</configuration>
+		<configuration configurationName="Release"/>
+		<configuration configurationName="Debug"/>
 	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
