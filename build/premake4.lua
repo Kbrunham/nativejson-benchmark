@@ -85,7 +85,7 @@ solution "benchmark"
             "../thirdparty/include/",
             "../thirdparty/ujson4c/3rdparty/",
 			"../thirdparty/udp-json-parser/",
-			os.getenv("BOOST_HOME")
+			os.getenv("BOOST_ROOT")
         }
 
 		files { 
@@ -112,7 +112,7 @@ solution "benchmark"
             "../thirdparty/udp-json-parser/",
             "../thirdparty/include/",
 	        "../thirdparty/folly/",
-			os.getenv("BOOST_HOME")
+			os.getenv("BOOST_ROOT")
         }
 
 		files { 
@@ -125,11 +125,11 @@ solution "benchmark"
 
 		setTargetObjDir("../bin")
 
-		linkLib("jsonclibs")
-		links "jsonclibs"
+		linkLib ("jsonclibs")
+		links {"jsonclibs", "glog", "pthread", "Qt5Core"}
 
 		configuration "gmake"
-			buildoptions "-std=c++11"
+			buildoptions "-std=c++11 -fPIC"
 
 solution "jsonstat"
     configurations { "release" }
@@ -161,7 +161,7 @@ solution "jsonstat"
         "../thirdparty/udp-json-parser/",
         "../thirdparty/include/",
         "../thirdparty/folly/",
-		os.getenv("BOOST_HOME")
+		os.getenv("BOOST_ROOT")
 		
     }
 
@@ -200,10 +200,9 @@ solution "jsonstat"
             	testfile
 			}
 			libdirs { "../bin/jsonstat" }
-			linkLib("jsonclibs2")
-			links "jsonclibs2"
+			links {"jsonclibs2", "glog", "pthread", "Qt5Core"}
             setTargetObjDir("../bin/jsonstat")
 
 			configuration "gmake"
-				buildoptions "-std=c++11"
+				buildoptions "-std=c++11 -fPIC"
     end
