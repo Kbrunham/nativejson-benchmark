@@ -101,7 +101,7 @@ public:
 #if TEST_INFO
     virtual const char* GetName() const override { return "Qt Json (C++)"; }
     virtual const char* GetFilename() const override { return __FILE__; }
-    virtual unsigned long GetMaxSize() const override {return 2500000;}
+    virtual unsigned long GetMaxSize() const override {return 0;}
 #endif
 
 #if TEST_PARSE
