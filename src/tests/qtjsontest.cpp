@@ -8,6 +8,7 @@
 #include "../test.h"
 
 #include <string>
+#include <iostream>
 #include <QtCore/QtCore>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
@@ -106,8 +107,15 @@ public:
 #if TEST_PARSE
     virtual ParseResultBase* Parse(const char* json, size_t length) const override {
         QtJsonParseResult* pr = new QtJsonParseResult;
+        QJsonParseError json_err;
+        pr->root = QJsonDocument::fromJson(QString(json).toUtf8(), &json_err);
+        if (json_err.error != QJsonParseError::NoError)
+        {
+        	delete pr;
+        	pr = nullptr;
+        	std::cout << qPrintable(json_err.errorString()) << endl;
+        }
 
-        pr->root = QJsonDocument::fromJson(json);
 
     	return pr;
     }
@@ -118,7 +126,9 @@ public:
         const QtJsonParseResult* pr = static_cast<const QtJsonParseResult*>(parseResult);
         QtJsonStringResult* sr = new QtJsonStringResult;
 
-        sr->s = pr->root.toJson(QJsonDocument::Compact).toStdString().c_str();
+        QByteArray arr = pr->root.toJson(QJsonDocument::Compact);
+
+        sr->s = std::string(qPrintable(QString::fromUtf8(arr)));
 
         return sr;
     }
@@ -129,7 +139,9 @@ public:
         const QtJsonParseResult* pr = static_cast<const QtJsonParseResult*>(parseResult);
         QtJsonStringResult* sr = new QtJsonStringResult;
 
-        sr->s = pr->root.toJson(QJsonDocument::Indented).toStdString().c_str();
+        QByteArray arr = pr->root.toJson(QJsonDocument::Indented);
+
+        sr->s = std::string(qPrintable(QString::fromUtf8(arr)));
 
         return sr;
     }
